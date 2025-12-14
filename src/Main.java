@@ -8,21 +8,65 @@ public class Main {
     static String[] commodities = {"Gold", "Oil", "Silver", "Wheat", "Copper"};
     static String[] months = {"January","February","March","April","May","June",
             "July","August","September","October","November","December"};
+    static int[][][] data = new int[MONTHS][DAYS][COMMS];
 
 
     // ======== REQUIRED METHOD LOAD DATA (Students fill this) ========
     public static void loadData() {
-        Scanner sc = new Scanner(new File("/Data_Files/April.txt"));
-        System.out.println(sc.next());
+        for (int m = 0; m < months.length; m++) {
+            try {
+                Scanner sc = new Scanner(new File("src/Data_Files/" + months[m] + ".txt"));
+
+                if (sc.hasNextLine()) {
+                    sc.nextLine();
+                }
+
+                while (sc.hasNextLine()) {
+                    String line = sc.nextLine();
+                    String[] p = line.split(",");
+
+                    int day = Integer.parseInt(p[0]);
+                    String commodity = p[1];
+                    int profit = Integer.parseInt(p[2]);
+
+                    for (int c = 0; c < commodities.length; c++) {
+                        if (commodities[c].equals(commodity)) {
+                            data[m][day - 1][c] = profit;
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (FileNotFoundException e) {
+                System.out.println("Dosya bulunamadı!");
+            }
+        }
     }
 
     // ======== 10 REQUIRED METHODS (Students fill these) ========
 
     public static String mostProfitableCommodityInMonth(int month) {
-        if (month>11 || month<0)
+        if (month < 0 || month > 11) {
             return "INVALID_MONTH";
-        return "7";
+        }
 
+        int maxProfit = Integer.MIN_VALUE;
+        String result = "";
+
+        for (int c = 0; c < commodities.length; c++) {
+            int total = 0;
+
+            for (int d = 0; d < 28; d++) {
+                total += data[month][d][c];
+            }
+
+            if (total > maxProfit) {
+                maxProfit = total;
+                result = commodities[c] + " " + total;
+            }
+        }
+
+        return result;
     }
 
     public static int totalProfitOnDay(int month, int day) {
@@ -63,6 +107,8 @@ public class Main {
 
     public static void main(String[] args) {
         loadData();
+        System.out.println(mostProfitableCommodityInMonth(6));
+        System.out.println(data[0][14][0]);
         System.out.println("Data loaded – ready for queries");
     }
 }
