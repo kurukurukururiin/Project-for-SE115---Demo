@@ -155,6 +155,8 @@ public class Main {
         return "DUMMY";
     }
 
+    //*
+
     public static void main(String[] args) {
         loadData();
         System.out.println("Data loaded – ready for queries");
@@ -165,4 +167,6 @@ public class Main {
         System.out.println(bestDayOfMonth(0));
         System.out.println(bestMonthForCommodity("Gold"));
     }
+
+    //*/
 }
