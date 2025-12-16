@@ -83,7 +83,7 @@ public class Main {
 
     public static int commodityProfitInRange(String commodity, int from, int to) {
         if ( commodity != "Gold" && commodity != "Wheat" && commodity != "Oil" && commodity != "Silver" && commodity != "Copper" ) {
-            if (to > 27 || from < 0 || to < 0 || from > to) {
+            if (to > 28 || from < 0 || to < 0 || from > to) {
                 return -99999;
             }
         }
@@ -106,11 +106,33 @@ public class Main {
     }
 
     public static int bestDayOfMonth(int month) {
-        return 1234;
+        if (month > 11 || month < 0) {
+            return -99999;
+        }
+        int bestDay = Integer.MIN_VALUE;
+        int returnday = 0;
+        for (int i = 0 ; i < DAYS ; i++) {
+            if (totalProfitOnDay(month,i) > bestDay) {
+                returnday = i;
+            }
+        }
+        return returnday;
     }
 
     public static String bestMonthForCommodity(String comm) {
-        return "DUMMY";
+        if ( comm != "Gold" && comm != "Wheat" && comm != "Oil" && comm != "Silver" && comm != "Copper" ) {
+            return "INVALID_COMMODITY";
+        }
+        String mon = "";
+        int maxmonth = 0;
+        int maxMValue = Integer.MIN_VALUE;
+        for (int i = 0 ; i < MONTHS ; i++) {
+            if (commodityProfitInRange(comm,0,28) > maxMValue) {
+                maxmonth = i;
+                maxMValue = commodityProfitInRange(comm,0,28);
+            }
+        }
+        return months[maxmonth] + " " + maxMValue;
     }
 
     public static int consecutiveLossDays(String comm) {
@@ -136,9 +158,11 @@ public class Main {
     public static void main(String[] args) {
         loadData();
         System.out.println("Data loaded – ready for queries");
-        System.out.println(mostProfitableCommodityInMonth(6));
+        System.out.println(mostProfitableCommodityInMonth(0));
         System.out.println(data[0][14][0]);
         System.out.println(totalProfitOnDay(0,27));
         System.out.println(commodityProfitInRange("Gold",0,1));
+        System.out.println(bestDayOfMonth(0));
+        System.out.println(bestMonthForCommodity("Gold"));
     }
 }
