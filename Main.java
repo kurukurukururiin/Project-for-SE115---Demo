@@ -136,15 +136,66 @@ public class Main {
     }
 
     public static int consecutiveLossDays(String comm) {
-        return 1234;
+        if ( comm != "Gold" && comm != "Wheat" && comm != "Oil" && comm != "Silver" && comm != "Copper" ) {
+            return -1;
+        }
+        int a = 0;
+        for(int i = 0 ; i < commodities.length ; i++) {
+            if (commodities[i] == comm) {
+                a = i;
+                break;
+            }
+        }
+        int Conseclssdays = 0;
+        int maxconsday = 0;
+        for (int i = 0 ; i < MONTHS ; i++) {
+            for (int c = 0 ; c < DAYS ; c++ ) {
+                if (data[i][c][a] < 0) {
+                    Conseclssdays += 1;
+                    if (Conseclssdays > maxconsday) {
+                        maxconsday = Conseclssdays;
+                    }
+                }
+                if (data[i][c][a] > 0) {
+                    Conseclssdays = 0;
+                }
+            }
+        }
+        return maxconsday;
     }
 
     public static int daysAboveThreshold(String comm, int threshold) {
-        return 1234;
+        if ( comm != "Gold" && comm != "Wheat" && comm != "Oil" && comm != "Silver" && comm != "Copper" ) {
+            return -1;
+        }
+        int trdays = 0;
+        int a = 0;
+        for(int i = 0 ; i < commodities.length ; i++) {
+            if (commodities[i] == comm) {
+                a = i;
+                break;
+            }
+        }
+        for (int i = 0 ; i < MONTHS ; i++) {
+            for (int c = 0 ; c < DAYS ; c++ ) {
+                if (data[i][c][a] > threshold) {
+                    trdays += 1;
+                }
+            }
+        }
+        return trdays;
     }
 
     public static int biggestDailySwing(int month) {
-        return 1234;
+        int biggstswng = 0;
+        int gxc = 0;
+        for (int i = 0 ; i < DAYS-1 ; i++) {
+            gxc = Math.abs(totalProfitOnDay(month, i) - totalProfitOnDay(month, i+1));
+            if ( gxc > biggstswng ) {
+                biggstswng = gxc;
+            }
+        }
+        return gxc;
     }
 
     public static String compareTwoCommodities(String c1, String c2) {
@@ -155,18 +206,8 @@ public class Main {
         return "DUMMY";
     }
 
-    //*
-
     public static void main(String[] args) {
         loadData();
         System.out.println("Data loaded – ready for queries");
-        System.out.println(mostProfitableCommodityInMonth(0));
-        System.out.println(data[0][14][0]);
-        System.out.println(totalProfitOnDay(0,27));
-        System.out.println(commodityProfitInRange("Gold",0,1));
-        System.out.println(bestDayOfMonth(0));
-        System.out.println(bestMonthForCommodity("Gold"));
     }
-
-    //*/
 }

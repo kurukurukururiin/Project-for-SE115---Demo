@@ -12,13 +12,13 @@ public class AutoGrader {
      // so students can see if their version of Main.java is compatible with the final AutoGrader test script.
      // When students implement the functions, the tests with dummy values of course will fail.
     static final Object[][] TESTS = {
-        {"mostProfitableCommodityInMonth", new Object[]{0}, "DUMMY"},
-        {"totalProfitOnDay", new Object[]{0, 15}, 1234},
-        {"commodityProfitInRange", new Object[]{"Gold", 1, 14}, 1234},
-        {"bestDayOfMonth", new Object[]{0}, 1234},
-        {"bestMonthForCommodity", new Object[]{"Gold"}, "DUMMY"},
-        {"consecutiveLossDays", new Object[]{"Gold"}, 1234},
-        {"daysAboveThreshold", new Object[]{"Gold", 2000}, 1234},
+        {"mostProfitableCommodityInMonth", new Object[]{0}, "Gold 71791"},
+        {"totalProfitOnDay", new Object[]{0, 15}, 8350},
+        {"commodityProfitInRange", new Object[]{"Gold", 1, 14}, 34432},
+        {"bestDayOfMonth", new Object[]{0}, 27},
+        {"bestMonthForCommodity", new Object[]{"Gold"}, "January 71791"},
+        {"consecutiveLossDays", new Object[]{"Gold"}, 4},
+        {"daysAboveThreshold", new Object[]{"Gold", 2000}, 123},
         {"biggestDailySwing", new Object[]{0}, 1234},
         {"compareTwoCommodities", new Object[]{"Gold", "Oil"}, "DUMMY is better by 1234"},
         {"bestWeekOfMonth", new Object[]{20}, "DUMMY"},
