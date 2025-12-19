@@ -190,7 +190,7 @@ public class Main {
         int biggstswng = 0;
         int gxc = 0;
         for (int i = 0 ; i < DAYS-1 ; i++) {
-            gxc = Math.abs(totalProfitOnDay(month, i) - totalProfitOnDay(month, i+1));
+            gxc = Math.abs(totalProfitOnDay(month, i)) - Math.abs(totalProfitOnDay(month, i+1));
             if ( gxc > biggstswng ) {
                 biggstswng = gxc;
             }
@@ -199,11 +199,37 @@ public class Main {
     }
 
     public static String compareTwoCommodities(String c1, String c2) {
-        return "DUMMY is better by 1234";
+        int comparedvalue = 0;
+        comparedvalue = commodityProfitInRange(c1,0,28) - commodityProfitInRange(c2,0,28);
+        if (commodityProfitInRange(c1,0,28) > commodityProfitInRange(c2,0,28)) {
+            return c1 + " is better by " + comparedvalue;
+        }
+        else if (commodityProfitInRange(c2,0,28) > commodityProfitInRange(c1,0,28)) {
+            return c2 + " is better by " + comparedvalue;
+        }
+        else {
+            return "equal";
+        }
     }
 
     public static String bestWeekOfMonth(int month) {
-        return "DUMMY";
+        int bestmonth = 0;
+        int bestmonthproft = 0;
+        int i = 0;
+        int xx= 7;
+        int monthlyproft = 0;
+        for (int c = 0 ; c < 4 ; c++) {
+            for (; i < xx;) {
+                i++;
+                monthlyproft += totalProfitOnDay(month, i);
+            }
+            if (monthlyproft > bestmonthproft) {
+                bestmonth = c + 1;
+            }
+            monthlyproft = 0;
+            xx +=7;
+        }
+        return "Week " + bestmonth;
     }
 
     public static void main(String[] args) {
