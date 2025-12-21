@@ -15,7 +15,7 @@ public class Main {
     public static void loadData() {
         for (int m = 0; m < months.length; m++) {
             try {
-                Scanner sc = new Scanner(new File("src/Data_Files/" + months[m] + ".txt"));
+                Scanner sc = new Scanner(new File("Data_Files/" + months[m] + ".txt"));
 
                 if (sc.hasNextLine()) {
                     sc.nextLine();
